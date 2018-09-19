@@ -27,6 +27,14 @@ export default class Register extends React.Component<any, any> {
     }
   };
 
+  public async componentDidMount() {
+    const test = await axios.get("http://localhost:8080/users/1");
+    console.log(test);
+    // const modifiedTest = test.data.split("}{")[0] + "}";
+    // JSON.parse(modifiedTest);
+    // console.log(JSON.parse(modifiedTest).username);
+  }
+
   public handleChange = (e: any) => {
     const newState = { ...this.state };
     newState[e.target.name] = e.target.value;
