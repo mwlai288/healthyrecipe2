@@ -1,20 +1,23 @@
-import * as React from 'react';
-import './App.css';
-
-import logo from './logo.svg';
+import * as React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Register from "./components/Register";
+import SignIn from "./components/SignIn";
+import Dashboard from "./components/Dashboard";
+import GetRecipe from "./components/getRecipe/GetRecipe";
+import Recipe from "./components/getRecipe/Recipe";
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact={true} path="/" component={SignIn} />
+          <Route path="/register" component={Register} />
+          <Route path="/search" component={GetRecipe} />
+          <Route path="/recipe/:name" component={Recipe} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
+      </Router>
     );
   }
 }
