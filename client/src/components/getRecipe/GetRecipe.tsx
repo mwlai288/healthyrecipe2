@@ -78,7 +78,7 @@ export default class GetRecipe extends React.Component<any, any> {
         <div>
           {this.state.recipes.map((recipe: any, i: number) => {
             return (
-              <div key={recipe.recipe.url}>
+              <div key={i}>
                 <img src={recipe.recipe.image} alt="No Image Available" />
                 <div>
                   <p>
