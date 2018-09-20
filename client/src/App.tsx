@@ -1,4 +1,5 @@
 import * as React from "react";
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/Register";
 import SignIn from "./components/SignIn";
@@ -14,6 +15,23 @@ class App extends React.Component {
           <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
+=======
+import "./App.css";
+import GetRecipe from "./components/getRecipe/GetRecipe";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+class App extends React.Component {
+  public render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <div id="main-content-container">
+            <Switch>
+              <Route path="/search" component={GetRecipe} />
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
+>>>>>>> getRecipe
     );
   }
 }
