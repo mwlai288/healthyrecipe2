@@ -37,26 +37,31 @@ export default class Register extends React.Component<any, any> {
     return (
       <div>
         <h1>Register to Healthy Recipes</h1>
-        <form onSubmit={this.registerUser}>
+        <form className="form-signin" onSubmit={this.registerUser}>
           <input
             onChange={this.handleChange}
             type="text"
             name="username"
-            placeholder="username"
+            placeholder="Username"
+            className="form-control"
           />
           <input
             onChange={this.handleChange}
             type="email"
             name="email"
             placeholder="Email"
+            className="form-control"
           />
           <input
             onChange={this.handleChange}
             type="password"
             name="password"
             placeholder="Password"
+            className="form-control"
           />
-          <button>Register</button>
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
+            Register
+          </button>
         </form>
       </div>
     );

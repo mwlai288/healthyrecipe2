@@ -40,22 +40,25 @@ export default class SignIn extends React.Component<any, any> {
     return (
       <div>
         <h1>Sign In to your Healthy Recipes account</h1>
-        <form onSubmit={this.signInUser}>
+
+        <form className="form-signin" onSubmit={this.signInUser}>
           <label htmlFor="sign-in-username">Username: </label>
           <input
             type="text"
-            id="sign-in-username"
-            placeholder="enter username"
+            className="form-control"
+            placeholder="Username"
             onChange={this.handleChange}
           />
           <label htmlFor="sign-in-password">Password: </label>
           <input
             type="password"
-            id="sign-in-password"
+            className="form-control"
             placeholder="enter password"
             onChange={this.handleChange}
           />
-          <button type="submit">Sign in</button>
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
+            Sign in
+          </button>
         </form>
       </div>
     );
