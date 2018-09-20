@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as React from "react";
+// import { Link } from "react-router-dom";
 
 export default class Recipe extends React.Component<any, any> {
   constructor(props: any) {
@@ -64,30 +65,57 @@ export default class Recipe extends React.Component<any, any> {
                     </tr>
                     <tr>
                       <th>Yield</th>
+                      <td>
+                        <p>{item.recipe.yield}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Calories</th>
+                      <td>
+                        <p>{item.recipe.calories}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Fat</th>
+                      <td>
+                        <p>{item.recipe.totalNutrients.FAT.quantity}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Protein</th>
+                      <td>
+                        <p>{item.recipe.totalNutrients.PROCNT.quantity}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Carbs</th>
+                      <td>
+                        <p>{item.recipe.totalNutrients.CHOCDF.quantity}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Fiber</th>
+                      <td>
+                        <p>{item.recipe.totalNutrients.FIBTG.quantity}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Sodium</th>
+                      <td>
+                        <p>{item.recipe.totalNutrients.NA.quantity}</p>
+                      </td>
                     </tr>
                     <tr>
                       <th>Cholesterol</th>
+                      {/* <td>
+                        <p>{item.recipe.CHOLE.quantity}</p>
+                      </td> */}
                     </tr>
                     <tr>
                       <th>Recipe</th>
+                      <td>
+                        {/* <Link> {item.recipe.url}</Link> */}
+                      </td>
                     </tr>
                   </thead>
                 );
