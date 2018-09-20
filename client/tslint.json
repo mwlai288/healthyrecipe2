@@ -1,6 +1,5 @@
 {
-<<<<<<< HEAD
-	"extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+	"extends": [],
 	"linterOptions": {
 		"exclude": [
 			"config/**/*.js",
@@ -17,14 +16,4 @@
 		"jsx-no-bind": false,
 		"jsx-boolean-value": false
 	}
-=======
-  "extends": [],
-  "linterOptions": {
-    "exclude": [
-      "config/**/*.js",
-      "node_modules/**/*.ts",
-      "coverage/lcov-report/*.js"
-    ]
-  }
->>>>>>> getRecipe
 }

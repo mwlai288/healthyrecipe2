@@ -1,8 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-
-// export interface IAppProps {
-// }
+import { Link } from "react-router-dom";
 
 export default class GetRecipe extends React.Component<any, any> {
   constructor(props: any) {
@@ -99,6 +97,7 @@ export default class GetRecipe extends React.Component<any, any> {
                 >
                   like
                 </button>
+                <Link to={`/recipe/${recipe.recipe.label}`}>View</Link>
               </div>
             );
           })}

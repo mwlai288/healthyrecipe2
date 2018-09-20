@@ -20,12 +20,14 @@ export default class SignIn extends React.Component<any, any> {
     };
     const res = await axios.post("http://localhost:8080/users/login", payload);
     if (res.status === 200) {
+      // localStorage.setItem()
       this.props.history.push("/dashboard");
     } else if (res.status === 403) {
       throw Error("Invalid credentials");
     } else {
       throw Error("Error while attempting to sign in");
     }
+    console.log(res);
   };
 
   public handleChange = (e: any) => {
