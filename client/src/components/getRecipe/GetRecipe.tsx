@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export default class GetRecipe extends React.Component<any, any> {
   constructor(props: any) {
@@ -21,13 +22,14 @@ export default class GetRecipe extends React.Component<any, any> {
     e.preventDefault();
     const { search } = this.state;
     const res = await axios.get(
-      `https://api.edamam.com/search?q=${search}&app_id=c71621aa&app_key=2b7de0e604c8a0bf9f16e4b6419b9835`
+      `https://api.edamam.com/search?q=${search}&app_id=c71621aa&app_key=2b7de0e604c8a0bf9f16e4b6419b9835&from=0&to=21`
     );
     console.log(res.data.hits);
     this.setState({
       recipes: res.data.hits
     });
   };
+
   public like = async (recipe: any) => {
     const ingredients = new Array();
     recipe.recipe.ingredients.forEach((each: any, i: number) => {
@@ -68,41 +70,90 @@ export default class GetRecipe extends React.Component<any, any> {
   public render() {
     return (
       <div>
-        <input
-          onChange={this.handleChange}
-          type="text"
-          name="search"
-          value={this.state.search}
-        />
-        <button onClick={this.searchRecipe}>Search</button>
-        <div>
+        <SearchBox className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="basic-addon1">
+              <i className="fas fa-search" />
+            </span>
+          </div>
+          <input
+            type="text"
+            value={this.state.search}
+            className="form-control"
+            placeholder="Search"
+            name="search"
+            aria-describedby="basic-addon1"
+            onChange={this.handleChange}
+          />
+          <button onClick={this.searchRecipe}>Search</button>
+        </SearchBox>
+
+        <RecipeGrid>
           {this.state.recipes.map((recipe: any, i: number) => {
             return (
               <div key={i}>
-                <img src={recipe.recipe.image} alt="No Image Available" />
-                <div>
-                  <p>
-                    Name:
-                    {recipe.recipe.label}
-                  </p>
+                <div className="container">
+                  <div className="row">
+                    <div className="card mb-4 shadow-sm">
+                      <ImageSize
+                        className="card-img-top"
+                        src={recipe.recipe.image}
+                        alt="No Image Available"
+                      />
+                      <div className="card-body">
+                        <p className="card-text">
+                          Name:
+                          {recipe.recipe.label}
+                        </p>
+                      </div>
+                      <div className="card-body">
+                        <p className="card-text">
+                          Calories:
+                          {Math.round(
+                            (recipe.recipe.calories /= recipe.recipe.yield)
+                          )}
+                        </p>
+                      </div>
+                      <div className="btn-group card-body">
+                        <button
+                          className="btn btn-sm btn-outline-secondary"
+                          onClick={() => {
+                            this.like(recipe);
+                          }}
+                        >
+                          Like
+                        </button>
+                        <button className="btn btn-sm btn-outline-secondary">
+                          <Link to={`/recipe/${recipe.recipe.label}`}>
+                            View
+                          </Link>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p>
-                  Calories:
-                  {Math.round((recipe.recipe.calories /= recipe.recipe.yield))}
-                </p>
-                <button
-                  onClick={() => {
-                    this.like(recipe);
-                  }}
-                >
-                  like
-                </button>
-                <Link to={`/recipe/${recipe.recipe.label}`}>View</Link>
               </div>
             );
           })}
-        </div>
+        </RecipeGrid>
       </div>
     );
   }
 }
+
+const ImageSize = styled.img`
+  display: block;
+  height: 225px;
+  width: 100%;
+`;
+
+const RecipeGrid = styled.div`
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 1rem;
+`;
+
+const SearchBox = styled.div`
+  padding-top: 4rem;
+`;
