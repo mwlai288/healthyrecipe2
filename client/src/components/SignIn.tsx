@@ -24,7 +24,6 @@ export default class SignIn extends React.Component<any, any> {
       localStorage.setItem("username", res.data.username);
       localStorage.setItem("friends", JSON.stringify(res.data.friends));
       localStorage.setItem("comments", JSON.stringify(res.data.comment));
-      localStorage.setItem("userId", res.data);
       this.props.history.push("/dashboard");
     } else if (res.status === 403) {
       throw Error("Invalid credentials");

@@ -45,13 +45,13 @@ export default class GetRecipe extends React.Component<any, any> {
       image: recipe.recipe.image,
       label: recipe.recipe.label,
       yield: recipe.recipe.yield,
-      calories: recipe.recipe.calories,
-      fat: recipe.recipe.totalNutrients.FAT.quantity,
-      fiber: recipe.recipe.totalNutrients.FIBTG.quantity,
-      protein: recipe.recipe.totalNutrients.PROCNT.quantity,
-      carbs: recipe.recipe.totalNutrients.CHOCDF.quantity,
-      sodium: recipe.recipe.totalNutrients.NA.quantity,
-      cholesterol: recipe.recipe.totalNutrients.CHOLE.quantity,
+      calories: recipe.recipe.calories || 0,
+      fat: recipe.recipe.totalNutrients.FAT.quantity || 0,
+      fiber: recipe.recipe.totalNutrients.FIBTG.quantity || 0,
+      protein: recipe.recipe.totalNutrients.PROCNT.quantity || 0,
+      carbs: recipe.recipe.totalNutrients.CHOCDF.quantity || 0,
+      sodium: recipe.recipe.totalNutrients.NA.quantity || 0,
+      cholesterol: recipe.recipe.totalNutrients.quantity || 0,
       recipe: recipe.recipe.url,
       dietLabel: recipe.recipe.dietLabels[0],
       healthLabel: [],
@@ -67,6 +67,9 @@ export default class GetRecipe extends React.Component<any, any> {
       `http://localhost:8080/comment/${localStorage.getItem("userId")}`,
       comment
     );
+    if (res.status === 201) {
+      this.props.history.push("/dashboard");
+    }
     console.log(res);
     console.log(res1);
     //  localStorage.setItem('commentId', res..comment)

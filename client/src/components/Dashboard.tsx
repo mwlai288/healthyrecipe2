@@ -9,9 +9,15 @@ export default class Dashboard extends React.Component<any, any> {
       recipes: []
     };
   }
+
   public componentDidMount = async () => {
+    const res = await axios.get(
+      `http://localhost:8080/users/${localStorage.getItem("userId")}`
+    );
+    localStorage.setItem("friends", JSON.stringify(res.data.friends));
+    localStorage.setItem("comments", JSON.stringify(res.data.comment));
     let comment = localStorage.getItem("comments");
-    // let com=[];
+
     if (comment) {
       // com=JSON.parse(comment);
 
