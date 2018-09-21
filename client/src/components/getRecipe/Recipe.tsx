@@ -21,84 +21,66 @@ export default class Recipe extends React.Component<any, any> {
   }
 
   public render() {
-    // const ingredientList = this.state.recipe.ingredientLines.forEach(
-    //   (line: any) => {
-    //     <ul>
-    //       <li>{line}</li>
-    //     </ul>;
-    //   }
-    // );
-
+    {
+      /* {item.recipe.ingredientLines.forEach((lines: any) => {
+      ingredients.push(lines);
+    })} */
+    }
+    // const ingredients = [];
     return (
       <div>
-        <h1>Recipe</h1>
-        <br />
         {this.state.recipe.map((item: any, i: number) => {
           return (
             <div key={i}>
               <RecipeHeader>
-                <img src={item.recipe.image} alt="No image available" />
+                <FoodPic src={item.recipe.image} alt="No image available" />
+
                 <FoodName>{item.recipe.label}</FoodName>
+                <div>
+                  Diet Label: {item.recipe.dietLabels} <br />
+                  Servings: {item.recipe.yield} <br />
+                  Calories: {Math.round(item.recipe.calories)} <br />
+                </div>
               </RecipeHeader>
-
-              <div>
-                <h2>
-                  Diet Label:
-                  {item.recipe.dietLabels}
-                </h2>
-                <p>Servings</p>
-                <p>{item.recipe.yield}</p>
-                <h2>Calories</h2>
-                <p>{Math.round(item.recipe.calories)}</p>
-              </div>
-
-              <div>
-                <h2>Nutrition</h2>
-                <h2>Fat</h2>
-                <p>
+              <RecipeNutrition>
+                <NutritionHeading>Nutrition</NutritionHeading>
+                <span>
+                  Fat:
                   {item.recipe.totalNutrients.FAT === undefined
                     ? 0
                     : Math.round(item.recipe.totalNutrients.FAT.quantity)}
+                  grams <br />
+                  Protein:
+                  {item.recipe.totalNutrients.PROCNT === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.PROCNT.quantity)}
+                  grams <br />
+                  Carbs:
+                  {item.recipe.totalNutrients.CHOCDF === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.CHOCDF.quantity)}
+                  grams <br />
+                  Fiber:
+                  {item.recipe.totalNutrients.FIBTG === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.FIBTG.quantity)}
+                  grams <br />
+                  Sodium:
+                  {item.recipe.totalNutrients.NA === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.NA.quantity)}
+                  grams <br />
+                  Cholesterol:
+                  {item.recipe.totalNutrients.CHOLE === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.CHOLE.quantity)}
                   grams
-                </p>
-                <h2>Protein</h2>
-                {item.recipe.totalNutrients.PROCNT === undefined
-                  ? 0
-                  : Math.round(item.recipe.totalNutrients.PROCNT.quantity)}
-                grams
-                <h2>Carbs</h2>
-                {item.recipe.totalNutrients.CHOCDF === undefined
-                  ? 0
-                  : Math.round(item.recipe.totalNutrients.CHOCDF.quantity)}
-                grams
-                <h2>Fiber</h2>
-                {item.recipe.totalNutrients.FIBTG === undefined
-                  ? 0
-                  : Math.round(item.recipe.totalNutrients.FIBTG.quantity)}
-                grams
-                <h2>Sodium</h2>
-                {item.recipe.totalNutrients.NA === undefined
-                  ? 0
-                  : Math.round(item.recipe.totalNutrients.NA.quantity)}
-                grams
-                <h2>Cholesterol</h2>
-                {item.recipe.totalNutrients.CHOLE === undefined
-                  ? 0
-                  : Math.round(item.recipe.totalNutrients.CHOLE.quantity)}
-                grams
-              </div>
-
-              {item.recipe.ingredientLines.map((line: any) => {
-                <ul>
-                  <li>line</li>
-                </ul>;
-                console.log(line);
-              })}
-
-              <h2>Recipe</h2>
-              <a target="_blank" href={item.recipe.url}>
-                View Full Recipe
-              </a>
+                  <br />
+                  <a target="_blank" href={item.recipe.url}>
+                    View Full Recipe
+                  </a>
+                </span>
+              </RecipeNutrition>
             </div>
           );
         })}
@@ -107,12 +89,29 @@ export default class Recipe extends React.Component<any, any> {
   }
 }
 
-const RecipeHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+const RecipeHeader = styled.span`
+  text-align: right;
+  top: -7rem;
+`;
+
+const RecipeNutrition = styled.div`
+  text-align: right;
+  /* padding: 2rem 10%; */
 `;
 
 const FoodName = styled.h1`
   font-style: italic;
+  text-decoration: underline;
+`;
+
+const NutritionHeading = styled.h1`
+  font-style: italic;
+  text-decoration: underline;
+`;
+
+const FoodPic = styled.img`
+  border-style: groove;
+  box-shadow: 0 0 35px black;
+  position: relative;
+  top: 10rem;
 `;
