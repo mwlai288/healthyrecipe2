@@ -144,7 +144,7 @@ export default class GetRecipe extends React.Component<any, any> {
 const ImageSize = styled.img`
   display: block;
   height: 225px;
-  width: 100%;
+  width: 20rem;
 `;
 
 const RecipeGrid = styled.div`
