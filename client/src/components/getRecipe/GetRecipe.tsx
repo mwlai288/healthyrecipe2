@@ -105,6 +105,7 @@ export default class GetRecipe extends React.Component<any, any> {
                         src={recipe.recipe.image}
                         alt="No Image Available"
                       />
+
                       <div className="card-body">
                         <p className="card-text">
                           Name:

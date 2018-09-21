@@ -17,6 +17,7 @@ export default class Dashboard extends React.Component<any, any> {
     return (
       <div>
         <h2>DASHBOARD</h2>
+        {/* <Friends /> */}
       </div>
     );
   }

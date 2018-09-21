@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as React from "react";
-// import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export default class Recipe extends React.Component<any, any> {
   constructor(props: any) {
@@ -12,118 +12,106 @@ export default class Recipe extends React.Component<any, any> {
 
   public async componentDidMount() {
     const name = this.props.match.params.name;
-    console.log(name);
     const res = await axios.get(
       `https://api.edamam.com/search?q=${name}&app_id=c71621aa&app_key=2b7de0e604c8a0bf9f16e4b6419b9835&from=0&to=1`
     );
-    console.log(res);
     this.setState({
       recipe: res.data.hits
     });
   }
 
-  //   public getRecipe = async (e: any) => {};
-  //   public like = async (recipe: any) => {
-  //     const ingredients = new Array();
-  //     recipe.recipe.ingredients.forEach((each: any, i: number) => {
-  //       const one = {
-  //         ingredient: {
-  //           ingredients: each.text
-  //         },
-  //         quantity: each.weight
-  //       };
-  //       ingredients.push(one);
-  //     });
-  //   };
-
   public render() {
+    {
+      /* {item.recipe.ingredientLines.forEach((lines: any) => {
+      ingredients.push(lines);
+    })} */
+    }
+    // const ingredients = [];
     return (
       <div>
-        <h1>Recipe</h1>
-        <br />
-        <div className="container">
-          <div className="row">
-            <table className="table table-bordered table-secondary">
-              {this.state.recipe.map((item: any, i: number) => {
-                return (
-                  <thead key={i}>
-                    <tr>
-                      <th scope="col">Attributes</th>
-                      <th scope="col">Values</th>
-                    </tr>
-                    <tr>
-                      <th>Name</th>
-                      <td>
-                        <p>{item.recipe.label}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Diet Label</th>
-                      <td>
-                        <p>{item.recipe.dietLabels}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Yield</th>
-                      <td>
-                        <p>{item.recipe.yield}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Calories</th>
-                      <td>
-                        <p>{item.recipe.calories}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Fat</th>
-                      <td>
-                        <p>{item.recipe.totalNutrients.FAT.quantity}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Protein</th>
-                      <td>
-                        <p>{item.recipe.totalNutrients.PROCNT.quantity}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Carbs</th>
-                      <td>
-                        <p>{item.recipe.totalNutrients.CHOCDF.quantity}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Fiber</th>
-                      <td>
-                        <p>{item.recipe.totalNutrients.FIBTG.quantity}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Sodium</th>
-                      <td>
-                        <p>{item.recipe.totalNutrients.NA.quantity}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Cholesterol</th>
-                      {/* <td>
-                        <p>{item.recipe.CHOLE.quantity}</p>
-                      </td> */}
-                    </tr>
-                    <tr>
-                      <th>Recipe</th>
-                      <td>
-                        {/* <Link> {item.recipe.url}</Link> */}
-                      </td>
-                    </tr>
-                  </thead>
-                );
-              })}
-            </table>
-          </div>
-        </div>
+        {this.state.recipe.map((item: any, i: number) => {
+          return (
+            <div key={i}>
+              <RecipeHeader>
+                <FoodPic src={item.recipe.image} alt="No image available" />
+
+                <FoodName>{item.recipe.label}</FoodName>
+                <div>
+                  Diet Label: {item.recipe.dietLabels} <br />
+                  Servings: {item.recipe.yield} <br />
+                  Calories: {Math.round(item.recipe.calories)} <br />
+                </div>
+              </RecipeHeader>
+              <RecipeNutrition>
+                <NutritionHeading>Nutrition</NutritionHeading>
+                <span>
+                  Fat:
+                  {item.recipe.totalNutrients.FAT === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.FAT.quantity)}
+                  grams <br />
+                  Protein:
+                  {item.recipe.totalNutrients.PROCNT === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.PROCNT.quantity)}
+                  grams <br />
+                  Carbs:
+                  {item.recipe.totalNutrients.CHOCDF === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.CHOCDF.quantity)}
+                  grams <br />
+                  Fiber:
+                  {item.recipe.totalNutrients.FIBTG === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.FIBTG.quantity)}
+                  grams <br />
+                  Sodium:
+                  {item.recipe.totalNutrients.NA === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.NA.quantity)}
+                  grams <br />
+                  Cholesterol:
+                  {item.recipe.totalNutrients.CHOLE === undefined
+                    ? 0
+                    : Math.round(item.recipe.totalNutrients.CHOLE.quantity)}
+                  grams
+                  <br />
+                  <a target="_blank" href={item.recipe.url}>
+                    View Full Recipe
+                  </a>
+                </span>
+              </RecipeNutrition>
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
+
+const RecipeHeader = styled.span`
+  text-align: right;
+  top: -7rem;
+`;
+
+const RecipeNutrition = styled.div`
+  text-align: right;
+  /* padding: 2rem 10%; */
+`;
+
+const FoodName = styled.h1`
+  font-style: italic;
+  text-decoration: underline;
+`;
+
+const NutritionHeading = styled.h1`
+  font-style: italic;
+  text-decoration: underline;
+`;
+
+const FoodPic = styled.img`
+  border-style: groove;
+  box-shadow: 0 0 35px black;
+  position: relative;
+  top: 10rem;
+`;

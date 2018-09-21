@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import GetRecipe from "./components/getRecipe/GetRecipe";
 import Recipe from "./components/getRecipe/Recipe";
 import Nav from "./components/navbar/Nav";
+import Friends from "./components/friends/Friends";
 
 class App extends React.Component {
   public render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
               <Route path="/search" component={GetRecipe} />
               <Route path="/recipe/:name" component={Recipe} />
               <Route path="/dashboard" component={Dashboard} />
+              <Route path="/friends" component={Friends} />
             </Switch>
           </div>
         </Router>
