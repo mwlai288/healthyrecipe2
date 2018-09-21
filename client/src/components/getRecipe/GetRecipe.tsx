@@ -58,13 +58,18 @@ export default class GetRecipe extends React.Component<any, any> {
       ingredients: ingredients
     };
 
-    await axios.post("http://localhost:8080/recipe", payload);
-    // let data = JSON.parse(res.data.split("}{") + "}");
-    // let comment = { recipeId: data.recipeId, post: "" };
-    // await axios.post(
-    //   `http://localhost:8080/comments/${localStorage.getItem(userId)}`,
-    //   comment
-    // );
+    const res1 = await axios.post("http://localhost:8080/recipe", payload);
+    const comment = {
+      post: "",
+      recipeId: res1.data.recipeId
+    };
+    const res = await axios.post(
+      `http://localhost:8080/comment/${localStorage.getItem("userId")}`,
+      comment
+    );
+    console.log(res);
+    console.log(res1);
+    //  localStorage.setItem('commentId', res..comment)
   };
 
   public render() {

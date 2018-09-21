@@ -13,14 +13,14 @@ export default class SignIn extends React.Component<any, any> {
   public signInUser = async (e: any) => {
     e.preventDefault();
 
-    const { password, username } = this.state;
     const payload = {
-      password,
-      username
+      password: this.state.password,
+      username: this.state.username
     };
+    console.log(payload);
     const res = await axios.post("http://localhost:8080/users/login", payload);
     if (res.status === 200) {
-      // localStorage.setItem()
+      localStorage.setItem("userId", res.data);
       this.props.history.push("/dashboard");
     } else if (res.status === 403) {
       throw Error("Invalid credentials");
@@ -45,6 +45,7 @@ export default class SignIn extends React.Component<any, any> {
           <label htmlFor="sign-in-username">Username: </label>
           <input
             type="text"
+            name="username"
             className="form-control"
             placeholder="Username"
             onChange={this.handleChange}
@@ -53,6 +54,7 @@ export default class SignIn extends React.Component<any, any> {
           <input
             type="password"
             className="form-control"
+            name="password"
             placeholder="enter password"
             onChange={this.handleChange}
           />
