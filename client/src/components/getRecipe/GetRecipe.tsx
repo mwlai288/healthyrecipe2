@@ -77,7 +77,7 @@ export default class GetRecipe extends React.Component<any, any> {
 
   public render() {
     return (
-      <div>
+      <div className="container">
         <SearchBox className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text" id="basic-addon1">

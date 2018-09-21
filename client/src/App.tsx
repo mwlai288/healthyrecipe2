@@ -7,6 +7,7 @@ import GetRecipe from "./components/getRecipe/GetRecipe";
 import Recipe from "./components/getRecipe/Recipe";
 import Nav from "./components/navbar/Nav";
 import Friends from "./components/friends/Friends";
+import FriendsDash from "./components/friends/FriendsDash";
 
 class App extends React.Component {
   public render() {
@@ -14,7 +15,7 @@ class App extends React.Component {
       <div>
         <Nav />
         <Router>
-          <div className="container">
+          <div>
             <Switch>
               <Route exact path="/" component={SignIn} />
               <Route path="/register" component={Register} />
@@ -22,6 +23,7 @@ class App extends React.Component {
               <Route path="/recipe/:name" component={Recipe} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/friends" component={Friends} />
+              <Route path="/:userId/friend" component={FriendsDash} />
             </Switch>
           </div>
         </Router>

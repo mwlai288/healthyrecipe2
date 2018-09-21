@@ -21,12 +21,6 @@ export default class Recipe extends React.Component<any, any> {
   }
 
   public render() {
-    {
-      /* {item.recipe.ingredientLines.forEach((lines: any) => {
-      ingredients.push(lines);
-    })} */
-    }
-    // const ingredients = [];
     return (
       <div>
         {this.state.recipe.map((item: any, i: number) => {
