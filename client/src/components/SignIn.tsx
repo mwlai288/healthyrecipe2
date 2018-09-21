@@ -20,6 +20,10 @@ export default class SignIn extends React.Component<any, any> {
     console.log(payload);
     const res = await axios.post("http://localhost:8080/users/login", payload);
     if (res.status === 200) {
+      localStorage.setItem("userId", res.data.userId);
+      localStorage.setItem("username", res.data.username);
+      localStorage.setItem("friends", JSON.stringify(res.data.friends));
+      localStorage.setItem("comments", JSON.stringify(res.data.comment));
       localStorage.setItem("userId", res.data);
       this.props.history.push("/dashboard");
     } else if (res.status === 403) {
