@@ -23,7 +23,7 @@ class App extends React.Component {
               <Route path="/recipe/:name" component={Recipe} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/friends" component={Friends} />
-              <Route path="/:userId/friend" component={FriendsDash} />
+              <Route path="/:id/friend" component={FriendsDash} />
             </Switch>
           </div>
         </Router>

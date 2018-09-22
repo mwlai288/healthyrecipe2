@@ -65,7 +65,7 @@ export default class Dashboard extends React.Component<any, any> {
                           <div>
                             <div>
                               <p>
-                                <Link to={`/${user.userId}/friend}`}>
+                                <Link to={`/${user.userId}/friend`}>
                                   <Avatar
                                     src={user.avatar}
                                     alt="No Image Available"

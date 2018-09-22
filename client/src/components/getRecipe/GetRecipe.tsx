@@ -41,6 +41,7 @@ export default class GetRecipe extends React.Component<any, any> {
       };
       ingredients.push(one);
     });
+
     const payload = {
       image: recipe.recipe.image,
       label: recipe.recipe.label,
@@ -72,7 +73,6 @@ export default class GetRecipe extends React.Component<any, any> {
     }
     console.log(res);
     console.log(res1);
-    //  localStorage.setItem('commentId', res..comment)
   };
 
   public render() {
@@ -93,7 +93,9 @@ export default class GetRecipe extends React.Component<any, any> {
             aria-describedby="basic-addon1"
             onChange={this.handleChange}
           />
-          <button onClick={this.searchRecipe}>Search</button>
+          <button id="getRecipe" onClick={this.searchRecipe}>
+            Search
+          </button>
         </SearchBox>
 
         <RecipeGrid>

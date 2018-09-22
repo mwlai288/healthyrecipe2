@@ -94,9 +94,9 @@ const NutritionTitle = styled.h1`
 const FoodName = styled.h1`
   display: flex;
   font-style: italic;
+  font-family: "Prata", serif;
   justify-content: center;
   position: top;
-  text-decoration: underline;
 `;
 
 const NutrionInfo = styled.div`
