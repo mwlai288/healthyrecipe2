@@ -51,6 +51,12 @@ export default class Dashboard extends React.Component<any, any> {
   };
 
   public render() {
+    let comment = localStorage.getItem("comments");
+    let commentList = { post: "" };
+    if (comment) {
+      commentList = JSON.parse(comment);
+    }
+
     return (
       <div>
         <div className="container-fluid">
@@ -63,17 +69,18 @@ export default class Dashboard extends React.Component<any, any> {
                       <div className="container">
                         <div className="row">
                           <div>
-                            <div>
-                              <p>
-                                <Link to={`/${user.userId}/friend`}>
-                                  <Avatar
-                                    src={user.avatar}
-                                    alt="No Image Available"
-                                  />
-                                  {user.username}
-                                </Link>
-                              </p>
-                            </div>
+                            <p>
+                              <Link
+                                onClick={() => this.friendPage(user.userId)}
+                                to={`/${user.userId}/friend`}
+                              >
+                                <Avatar
+                                  src={user.avatar}
+                                  alt="No Image Available"
+                                />
+                                {user.username}
+                              </Link>
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -110,6 +117,18 @@ export default class Dashboard extends React.Component<any, any> {
                               Calories:
                               {recipe.calories}
                             </p>
+                            <div>
+                              <p>{commentList[i].post}</p>
+                              {this.state.users.forEach((user: any) => {
+                                {
+                                  user.comment.forEach((each: any) => {
+                                    if (each.recipeId === recipe.recipeId) {
+                                      <p>{each.post}</p>;
+                                    }
+                                  });
+                                }
+                              })}
+                            </div>
                           </div>
                           <div className="btn-group card-body" />
                         </div>
