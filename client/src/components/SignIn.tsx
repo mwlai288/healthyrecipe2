@@ -47,6 +47,7 @@ export default class SignIn extends React.Component<any, any> {
         <form className="form-signin" onSubmit={this.signInUser}>
           <label htmlFor="sign-in-username">Username: </label>
           <input
+            id="username"
             type="text"
             name="username"
             className="form-control"
@@ -55,6 +56,7 @@ export default class SignIn extends React.Component<any, any> {
           />
           <label htmlFor="sign-in-password">Password: </label>
           <input
+            id="password"
             type="password"
             className="form-control"
             name="password"

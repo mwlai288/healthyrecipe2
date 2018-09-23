@@ -39,6 +39,7 @@ export default class Register extends React.Component<any, any> {
         <h1>Register to Healthy Recipes</h1>
         <form className="form-signin" onSubmit={this.registerUser}>
           <input
+            id="username"
             onChange={this.handleChange}
             type="text"
             name="username"
@@ -47,6 +48,7 @@ export default class Register extends React.Component<any, any> {
           />
           <input
             onChange={this.handleChange}
+            id="email"
             type="email"
             name="email"
             placeholder="Email"
@@ -55,6 +57,7 @@ export default class Register extends React.Component<any, any> {
           <input
             onChange={this.handleChange}
             type="password"
+            id="password"
             name="password"
             placeholder="Password"
             className="form-control"
