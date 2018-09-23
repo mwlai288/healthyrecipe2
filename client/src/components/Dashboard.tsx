@@ -38,11 +38,19 @@ export default class Dashboard extends React.Component<any, any> {
         });
       }
 
-      console.log(res1);
       this.setState({
         recipes: res1.data
       });
     }
+  };
+
+  public addPost = (e: any) => {
+    e.preventDefault();
+    const res = axios.post(
+      `http://localhost:8080/comment/${localStorage.getItem("userId")}`,
+      e
+    );
+    console.log(res);
   };
 
   public friendPage = (e: any) => {
@@ -97,38 +105,60 @@ export default class Dashboard extends React.Component<any, any> {
                   <div className="container" key={i}>
                     <div className="row">
                       <div className="card mb-4 shadow-sm">
-                        <ImageSize
-                          className="card-img-top"
-                          src={recipe.image}
-                          alt="No Image Available"
-                        />
+                        <Link to={`/recipe/${recipe.label}`}>
+                          <ImageSize
+                            className="card-img-top"
+                            src={recipe.image}
+                            alt="No Image Available"
+                          />
+                        </Link>
                         <div className="card-body">
-                          <p className="card-text">
-                            Name:
-                            {recipe.label}
-                          </p>
+                          <span className="card-text">
+                            Recipe: {recipe.label}
+                          </span>
                         </div>
-                        <div className="card-body">
-                          <p className="card-text">
-                            Calories:
-                            {recipe.calories}
-                          </p>
-                          <div>
-                            <p>{commentList[i].post}</p>
 
-                            {this.state.users.map((user: any) => {
-                              let filteredComments;
-                              filteredComments = user.comment.filter(
-                                (each: any) => each.recipeId === recipe.recipeId
-                              );
-                              return filteredComments.map((comment: any) => {
-                                return comment.post;
-                              });
-                            })}
-                          </div>
+                        <span className="card-text">
+                          Total Calories:
+                          {recipe.calories}
+                        </span>
+                        <div>
+                          <p>
+                            {localStorage.getItem("username")}
+                            {commentList[i].post}
+                            {this.state.postBox && (
+                              <input
+                                type="text"
+                                name="comment"
+                                placeholder={commentList[i]}
+                              />
+                            )}
+                            {/* <button onClick={() => this.addPost(commentList[i])}> Add Comment</button> */}
+                          </p>
+                          {this.state.users.map((user: any) => {
+                            let filteredComments;
+                            filteredComments = user.comment.filter(
+                              (each: any) => each.recipeId === recipe.recipeId
+                            );
+                            return filteredComments.length > 0 ? (
+                              <p key={i}> {user.username} </p>
+                            ) : null;
+                          })}
+                          {this.state.users.map((user: any) => {
+                            let filteredComments;
+                            filteredComments = user.comment.filter(
+                              (each: any) => each.recipeId === recipe.recipeId
+                            );
+                            filteredComments.length > 0 ? (
+                              <p> {user.username} </p>
+                            ) : null;
+                            return filteredComments.map((comment: any) => {
+                              return comment.post;
+                            });
+                          })}
                         </div>
-                        <div className="btn-group card-body" />
                       </div>
+                      <div className="btn-group card-body" />
                     </div>
                   </div>
                 );
@@ -157,8 +187,7 @@ const RecipeGrid = styled.div`
 `;
 
 const ImageSize = styled.img`
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: 1rem;
+  display: block;
+  height: 225px;
+  width: 20rem;
 `;

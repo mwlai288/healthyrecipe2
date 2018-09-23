@@ -6,7 +6,8 @@ export default class Recipe extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      recipe: []
+      recipe: [],
+      users: []
     };
   }
 
@@ -31,7 +32,11 @@ export default class Recipe extends React.Component<any, any> {
                 <FoodPic src={item.recipe.image} alt="No image available" />
                 <NutrionInfo>
                   <NutritionTitle>Nutritional Info</NutritionTitle>
-                  Diet Label: {item.recipe.dietLabels} <br />
+                  Diet Label:
+                  {item.recipe.dietLabels
+                    ? " Seems Reasonable"
+                    : item.recipe.dietLabels}
+                  <br />
                   Servings: {item.recipe.yield} <br />
                   Calories: {Math.round(item.recipe.calories)} <br />
                   <div>

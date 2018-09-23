@@ -35,9 +35,9 @@ export default class Register extends React.Component<any, any> {
 
   public render() {
     return (
-      <div>
-        <h1>Register to Healthy Recipes</h1>
+      <div className="text-center">
         <form className="form-signin" onSubmit={this.registerUser}>
+          <h1>Register</h1>
           <input
             id="username"
             onChange={this.handleChange}
