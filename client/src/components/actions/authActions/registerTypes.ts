@@ -1,0 +1,7 @@
+export const registerTypes = {
+  NEW_USERNAME: "NEW_USERNAME",
+  NEW_PASSWORD: "NEW_PASSWORD",
+  NEW_EMAIL: "NEW_EMAIL",
+  NEW_AVATAR: "NEW_AVATAR",
+  SEND_ERROR: "SEND_ERROR"
+};

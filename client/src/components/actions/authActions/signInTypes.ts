@@ -1,0 +1,5 @@
+export const signInTypes = {
+  SHOW_ERROR: "SHOW_ERROR",
+  SEND_PASSWORD: "SEND_PASSWORD",
+  SEND_USERNAME: "SEND_USERNAME"
+};

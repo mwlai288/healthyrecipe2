@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Provider } from "react-redux";
+import { store } from "./Store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/Register";
 import SignIn from "./components/SignIn";
@@ -12,10 +14,10 @@ import FriendsDash from "./components/friends/FriendsDash";
 class App extends React.Component {
   public render() {
     return (
-      <div>
-        <Nav />
+      <Provider store={store}>
         <Router>
           <div>
+            <Nav />
             <Switch>
               <Route exact path="/" component={SignIn} />
               <Route path="/register" component={Register} />
@@ -27,7 +29,7 @@ class App extends React.Component {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     );
   }
 }
