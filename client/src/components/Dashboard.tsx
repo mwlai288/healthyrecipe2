@@ -123,8 +123,11 @@ export default class Dashboard extends React.Component<any, any> {
                           {recipe.calories}
                         </span>
                         <div>
-                          <p>
-                            {localStorage.getItem("username")}
+                          <Inline>
+                            <AuthorComment>
+                              {localStorage.getItem("username")}
+                              {": "}
+                            </AuthorComment>
                             {commentList[i].post}
                             {this.state.postBox && (
                               <input
@@ -134,28 +137,31 @@ export default class Dashboard extends React.Component<any, any> {
                               />
                             )}
                             {/* <button onClick={() => this.addPost(commentList[i])}> Add Comment</button> */}
-                          </p>
-                          {this.state.users.map((user: any) => {
-                            let filteredComments;
-                            filteredComments = user.comment.filter(
-                              (each: any) => each.recipeId === recipe.recipeId
-                            );
-                            return filteredComments.length > 0 ? (
-                              <p key={i}> {user.username} </p>
-                            ) : null;
-                          })}
-                          {this.state.users.map((user: any) => {
-                            let filteredComments;
-                            filteredComments = user.comment.filter(
-                              (each: any) => each.recipeId === recipe.recipeId
-                            );
-                            filteredComments.length > 0 ? (
-                              <p> {user.username} </p>
-                            ) : null;
-                            return filteredComments.map((comment: any) => {
-                              return comment.post;
-                            });
-                          })}
+                          </Inline>
+
+                          <Inline>
+                            {this.state.users.map((user: any) => {
+                              let filteredComments;
+                              filteredComments = user.comment.filter(
+                                (each: any) => each.recipeId === recipe.recipeId
+                              );
+                              return filteredComments.length > 0 ? (
+                                <AuthorComment key={i}>
+                                  {user.username}
+                                  {": "}
+                                </AuthorComment>
+                              ) : null;
+                            })}
+                            {this.state.users.map((user: any) => {
+                              let filteredComments;
+                              filteredComments = user.comment.filter(
+                                (each: any) => each.recipeId === recipe.recipeId
+                              );
+                              return filteredComments.map((comment: any) => {
+                                return comment.post;
+                              });
+                            })}
+                          </Inline>
                         </div>
                       </div>
                       <div className="btn-group card-body" />
@@ -170,12 +176,23 @@ export default class Dashboard extends React.Component<any, any> {
     );
   }
 }
+
+const AuthorComment = styled.p`
+  font-weight: heavy;
+`;
+
 const Avatar = styled.img`
+  border-radius: 50%;
   padding-left: 5px;
+  height: 50px;
   vertical-align: middle;
   width: 50px;
-  height: 50px;
-  border-radius: 50%;
+`;
+
+const ImageSize = styled.img`
+  display: block;
+  height: 225px;
+  width: 20rem;
 `;
 
 const RecipeGrid = styled.div`
@@ -186,8 +203,8 @@ const RecipeGrid = styled.div`
   grid-row-gap: 1rem;
 `;
 
-const ImageSize = styled.img`
-  display: block;
-  height: 225px;
-  width: 20rem;
+const Inline = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;

@@ -17,6 +17,11 @@ export default class GetRecipe extends React.Component<any, any> {
     newState[e.target.name] = e.target.value;
     this.setState(newState);
   };
+  public handleChange1 = (e: any) => {
+    const newState = { ...this.state };
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  };
 
   public searchRecipe = async (e: any) => {
     e.preventDefault();
@@ -126,6 +131,15 @@ export default class GetRecipe extends React.Component<any, any> {
                         </p>
                       </div>
                       <div className="btn-group card-body">
+                        <input
+                          type="text"
+                          placeholder="comments"
+                          value={this.state.comment}
+                          className="form-control"
+                          name="comment"
+                          aria-describedby="basic-addon1"
+                          onChange={this.state.handleChange1}
+                        />
                         <button
                           className="btn btn-sm btn-outline-secondary"
                           onClick={() => {

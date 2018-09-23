@@ -19,6 +19,22 @@ export default class Recipe extends React.Component<any, any> {
     this.setState({
       recipe: res.data.hits
     });
+
+    const recipeId = await axios.post(
+      `http://localhost:8080/recipe/name`,
+      name
+    );
+    // localStorage.setItem("comments", JSON.stringify(res.data.comment));
+    let comment = localStorage.getItem("comments");
+    console.log(name);
+
+    if (comment) {
+      const recipeComment = JSON.parse(comment);
+      const test = recipeComment.filter(
+        (comment: any) => comment.recipeId == recipeId.data.recipeId
+      );
+      console.log(test);
+    }
   }
 
   public render() {
