@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import { registerReducer } from "./authReducers/registerReducer";
 import { signInReducer } from "./authReducers/signInReducer";
+import { recipeReducer } from "./recipeReducer";
 // import { chuckNorrisReducer } from "./chuck-norris.reducer";
 // import { PokemonSprite } from "../model/PokemonSprite";
-// import { recipeReducer } from "./recipeReducers/recipeReducer";
 
 // export interface IChuckNorrisState {
 //   buyJokeEnabled: boolean,
@@ -18,9 +18,10 @@ export interface IRegisterState {
   errorMessage: string;
 }
 
-// export interface IRecipeState {
-//   search: string;
-// }
+export interface IRecipeState {
+  search: "";
+  recipe: [];
+}
 
 export interface ISignInState {
   password: string;
@@ -30,14 +31,14 @@ export interface ISignInState {
 
 export interface IState {
   register: IRegisterState;
-  // clicker: IClickerState,
-  // recipe: IRecipeState;
+  recipe: IRecipeState;
   signIn: ISignInState;
+  // clicker: IClickerState,
 }
 
 export const state = combineReducers<IState>({
   register: registerReducer,
-  // clicker: clickerReducer,
-  // recipe: recipeReducer,
+  recipe: recipeReducer,
   signIn: signInReducer
+  // clicker: clickerReducer,
 });

@@ -168,3 +168,69 @@ const RecipeGrid = styled.div`
 const SearchBox = styled.div`
   padding-top: 4rem;
 `;
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+/////////////////////REDUX ATTEMPT BELOW//////////////////////////////
+/////////////////////REDUX ATTEMPT BELOW//////////////////////////////
+/////////////////////REDUX ATTEMPT BELOW//////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+// import * as React from "react";
+// // import { IState, IPokemonState } from '../../reducers';
+// import { connect } from "react-redux";
+// // import { fetchPokemon, updateId } from '../../actions/pokemon/pokemon.actions';
+// import {
+//   ingredients,
+//   getIngredient
+// } from "../actions/recipeActions/recipeAction";
+// import { IState, IRecipeState } from "../reducers";
+
+// interface IProps extends IRecipeState {
+//   getIngredient: (search: any) => any;
+//   ingredients: (search: any) => any;
+// }
+
+// export class GetRecipe extends React.Component<IProps, any> {
+//   public render() {
+//     console.log(this.props);
+//     const { search, recipe } = this.props;
+//     return (
+//       <div>
+//         <input
+//           value={search}
+//           name="search"
+//           onChange={(event: any) => {
+//             this.props.ingredients(event.target.value);
+//           }}
+//         />
+//         <button
+//           className="btn btn-primary"
+//           onClick={() => {
+//             this.props.getIngredient(search);
+//           }}
+//         >
+//           Search Recipe
+//         </button>
+//         <br />
+//         <div className="container">
+//           <div className="row">
+//             {recipe.map((item: any) => item.data.recipe.url)}
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = (state: IState) => state.recipe;
+// const mapDispatchToProps = {
+//   ingredients,
+//   getIngredient
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(GetRecipe);
