@@ -33,7 +33,6 @@ export default class Dashboard extends React.Component<any, any> {
           `http://localhost:8080/users/friends`,
           JSON.parse(friend)
         );
-        console.log(res2);
         this.setState({
           users: res2.data
         });
@@ -68,20 +67,18 @@ export default class Dashboard extends React.Component<any, any> {
                     <div key={i}>
                       <div className="container">
                         <div className="row">
-                          <div>
-                            <p>
-                              <Link
-                                onClick={() => this.friendPage(user.userId)}
-                                to={`/${user.userId}/friend`}
-                              >
-                                <Avatar
-                                  src={user.avatar}
-                                  alt="No Image Available"
-                                />
-                                {user.username}
-                              </Link>
-                            </p>
-                          </div>
+                          <p>
+                            <Link
+                              onClick={() => this.friendPage(user.userId)}
+                              to={`/${user.userId}/friend`}
+                            >
+                              <Avatar
+                                src={user.avatar}
+                                alt="No Image Available"
+                              />
+                              {user.username}
+                            </Link>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -97,41 +94,40 @@ export default class Dashboard extends React.Component<any, any> {
             <RecipeGrid>
               {this.state.recipes.map((recipe: any, i: number) => {
                 return (
-                  <div key={i}>
-                    <div className="container">
-                      <div className="row">
-                        <div className="card mb-4 shadow-sm">
-                          <ImageSize
-                            className="card-img-top"
-                            src={recipe.image}
-                            alt="No Image Available"
-                          />
-                          <div className="card-body">
-                            <p className="card-text">
-                              Name:
-                              {recipe.label}
-                            </p>
-                          </div>
-                          <div className="card-body">
-                            <p className="card-text">
-                              Calories:
-                              {recipe.calories}
-                            </p>
-                            <div>
-                              <p>{commentList[i].post}</p>
-                              {this.state.users.forEach((user: any) => {
-                                {
-                                  user.comment.forEach((each: any) => {
-                                    if (each.recipeId === recipe.recipeId) {
-                                      <p>{each.post}</p>;
-                                    }
-                                  });
-                                }
-                              })}
-                            </div>
-                          </div>
-                          <div className="btn-group card-body" />
+                  <div className="container" key={i}>
+                    <div className="row">
+                      <div className="card mb-4 shadow-sm">
+                        <ImageSize
+                          className="card-img-top"
+                          src={recipe.image}
+                          alt="No Image Available"
+                        />
+                        <div className="card-body">
+                          <p className="card-text">
+                            Name:
+                            {recipe.label}
+                          </p>
                         </div>
+                        <div className="card-body">
+                          <p className="card-text">
+                            Calories:
+                            {recipe.calories}
+                          </p>
+                          <div>
+                            <p>{commentList[i].post}</p>
+
+                            {this.state.users.map((user: any) => {
+                              let filteredComments;
+                              filteredComments = user.comment.filter(
+                                (each: any) => each.recipeId === recipe.recipeId
+                              );
+                              return filteredComments.map((comment: any) => {
+                                return comment.post;
+                              });
+                            })}
+                          </div>
+                        </div>
+                        <div className="btn-group card-body" />
                       </div>
                     </div>
                   </div>
