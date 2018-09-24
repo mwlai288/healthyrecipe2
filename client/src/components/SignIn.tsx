@@ -51,7 +51,7 @@ class SignIn extends React.Component<IProps, {}> {
 
   public render() {
     const { errorMessage, username, password } = this.props;
-
+    localStorage.clear();
     return (
       <form className="form-signin" onSubmit={this.submit}>
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>

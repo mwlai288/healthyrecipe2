@@ -22,11 +22,14 @@ class Register extends React.Component<IProps, {}> {
   public submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { email, password, username } = this.props;
+    const { email, password, username, avatar } = this.props;
     const payload = {
       email,
       password,
-      username
+      username,
+      avatar:
+        avatar ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
     };
     const res = await axios.post("http://localhost:8080/users", payload);
     if (res.status === 401) {
@@ -38,31 +41,6 @@ class Register extends React.Component<IProps, {}> {
     }
   };
 
-  // fetch("http://localhost:8080/users", {
-  //   body: JSON.stringify(this.props),
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //   method: "POST"
-  // })
-  //   .then(resp => {
-  //     console.log(resp.status);
-  //     if (resp.status === 401) {
-  //       this.props.updateError("Invalid Credentials");
-  //     } else if (resp.status === 200) {
-  //       return resp.json();
-  //     } else {
-  //       this.props.updateError("Failed to Register at this time");
-  //     }
-  //     throw new Error("Failed to register");
-  //   })
-  //   .then(resp => {
-  //     this.props.history.push("/");
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-  // };
   public passwordChange = (e: any) => {
     this.props.registerPassword(e.target.value);
   };
@@ -74,9 +52,12 @@ class Register extends React.Component<IProps, {}> {
   public emailChange = (e: any) => {
     this.props.registerEmail(e.target.value);
   };
+  public avatarChange = (e: any) => {
+    this.props.registerAvatar(e.target.value);
+  };
 
   public render() {
-    const { errorMessage, username, password, email } = this.props;
+    const { errorMessage, username, password, email, avatar } = this.props;
 
     return (
       <form className="form-signin" onSubmit={this.submit}>
@@ -114,8 +95,17 @@ class Register extends React.Component<IProps, {}> {
           required
         />
 
+        <label htmlFor="inputAvatar">Avatar Url</label>
+        <input
+          onChange={this.avatarChange}
+          value={avatar}
+          type="string"
+          className="form-control"
+          placeholder="URL for a picture (optional)"
+        />
+
         <button type="submit" className="btn btn-primary ">
-          Sign in
+          Register
         </button>
         {errorMessage && <p id="error-message">{errorMessage}</p>}
       </form>
