@@ -98,7 +98,7 @@ export default class GetRecipe extends React.Component<any, any> {
             aria-describedby="basic-addon1"
             onChange={this.handleChange}
           />
-          <button id="getRecipe" onClick={this.searchRecipe}>
+          <button id="search-recipe" onClick={this.searchRecipe}>
             Search
           </button>
         </SearchBox>

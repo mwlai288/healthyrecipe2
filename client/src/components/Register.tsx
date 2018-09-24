@@ -89,6 +89,7 @@ class Register extends React.Component<IProps, {}> {
           className="form-control"
           placeholder="Username"
           required
+          id="username"
         />
 
         <label htmlFor="passwordInput">Password</label>
@@ -99,6 +100,7 @@ class Register extends React.Component<IProps, {}> {
           className="form-control"
           placeholder="Password"
           required
+          id="password"
         />
 
         <label htmlFor="inputEmail">Email</label>
@@ -106,7 +108,7 @@ class Register extends React.Component<IProps, {}> {
           onChange={this.emailChange}
           value={email}
           type="email"
-          id="inputEmail"
+          id="email"
           className="form-control"
           placeholder="Email"
           required

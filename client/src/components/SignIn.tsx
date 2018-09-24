@@ -13,7 +13,7 @@ interface IProps extends RouteComponentProps<{}>, ISignInState {
   submit: (credentials: any) => any;
 }
 
-class SignInComponent extends React.Component<IProps, {}> {
+class SignIn extends React.Component<IProps, {}> {
   constructor(props: any) {
     super(props);
   }
@@ -98,4 +98,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInComponent);
+)(SignIn);
