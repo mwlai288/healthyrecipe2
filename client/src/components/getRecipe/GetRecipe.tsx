@@ -17,6 +17,7 @@ export default class GetRecipe extends React.Component<any, any> {
     newState[e.target.name] = e.target.value;
     this.setState(newState);
   };
+
   public handleChange1 = (e: any) => {
     const newState = { ...this.state };
     newState[e.target.name] = e.target.value;
@@ -26,8 +27,10 @@ export default class GetRecipe extends React.Component<any, any> {
   public searchRecipe = async (e: any) => {
     e.preventDefault();
     const { search } = this.state;
+    const appId = process.env.REACT_APP_EDMAM_APP_ID;
+    const apiKey = process.env.REACT_APP_EDAMAM_API_KEY;
     const res = await axios.get(
-      `https://api.edamam.com/search?q=${search}&app_id=c71621aa&app_key=2b7de0e604c8a0bf9f16e4b6419b9835&from=0&to=21`
+      `https://api.edamam.com/search?q=${search}&app_id=${appId}&app_key=${apiKey}&from=0&to=21`
     );
     console.log(res.data.hits);
     this.setState({
@@ -66,7 +69,7 @@ export default class GetRecipe extends React.Component<any, any> {
 
     const res1 = await axios.post("http://localhost:8080/recipe", payload);
     const comment = {
-      post: "",
+      post: this.state.comment,
       recipeId: res1.data.recipeId
     };
     const res = await axios.post(
@@ -98,7 +101,7 @@ export default class GetRecipe extends React.Component<any, any> {
             aria-describedby="basic-addon1"
             onChange={this.handleChange}
           />
-          <button id="search-recipe" onClick={this.searchRecipe}>
+          <button id="getRecipe" onClick={this.searchRecipe}>
             Search
           </button>
         </SearchBox>
@@ -125,9 +128,8 @@ export default class GetRecipe extends React.Component<any, any> {
                       <div className="card-body">
                         <p className="card-text">
                           Calories:
-                          {Math.round(
-                            (recipe.recipe.calories /= recipe.recipe.yield)
-                          )}
+                          {Math.round(recipe.recipe.calories)}
+                          <p>Servings: {recipe.recipe.yield}</p>
                         </p>
                       </div>
                       <div className="btn-group card-body">
@@ -137,8 +139,7 @@ export default class GetRecipe extends React.Component<any, any> {
                           value={this.state.comment}
                           className="form-control"
                           name="comment"
-                          aria-describedby="basic-addon1"
-                          onChange={this.state.handleChange1}
+                          onChange={this.handleChange1}
                         />
                         <button
                           className="btn btn-sm btn-outline-secondary"

@@ -38,7 +38,6 @@ class SignIn extends React.Component<IProps, {}> {
     } else {
       this.props.updateError("Failed to Login at this time");
     }
-    console.log(res);
   };
 
   public passwordChange = (e: any) => {

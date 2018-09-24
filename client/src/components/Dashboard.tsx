@@ -136,7 +136,6 @@ export default class Dashboard extends React.Component<any, any> {
                                 placeholder={commentList[i]}
                               />
                             )}
-                            {/* <button onClick={() => this.addPost(commentList[i])}> Add Comment</button> */}
                           </Inline>
 
                           <Inline>

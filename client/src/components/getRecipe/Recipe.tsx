@@ -13,8 +13,10 @@ export default class Recipe extends React.Component<any, any> {
 
   public async componentDidMount() {
     const name = this.props.match.params.name;
+    const appId = process.env.REACT_APP_EDMAM_APP_ID;
+    const apiKey = process.env.REACT_APP_EDAMAM_API_KEY;
     const res = await axios.get(
-      `https://api.edamam.com/search?q=${name}&app_id=c71621aa&app_key=2b7de0e604c8a0bf9f16e4b6419b9835&from=0&to=1`
+      `https://api.edamam.com/search?q=${name}&app_id=${appId}&app_key=${apiKey}&from=0&to=1`
     );
     this.setState({
       recipe: res.data.hits
@@ -46,10 +48,11 @@ export default class Recipe extends React.Component<any, any> {
               <FoodName>{item.recipe.label}</FoodName>
               <GridTest>
                 <FoodPic src={item.recipe.image} alt="No image available" />
+
                 <NutrionInfo>
                   <NutritionTitle>Nutritional Info</NutritionTitle>
                   Diet Label:
-                  {item.recipe.dietLabels
+                  {item.recipe.dietLabels.length === 0
                     ? " Seems Reasonable"
                     : item.recipe.dietLabels}
                   <br />
